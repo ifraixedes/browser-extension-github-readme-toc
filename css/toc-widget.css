@@ -1,0 +1,9 @@
+
+.toc-widget-ctn {
+  display: none;
+}
+
+.with-full-navigation .show {
+  display: block;
+}
+

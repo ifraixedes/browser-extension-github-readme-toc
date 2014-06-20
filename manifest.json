@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "github-readme-toc",
+  "version": "0.0.0",
+  "author": "Ivan Fraixedes <ivan@fraixed.es> (http://ivan.fraixed.es)",
+  "description": "See in the left side the table of content of the readme file in the github project page",
+  "icons": {
+  },
+  "permissions": [
+  ],
+  "content_scripts": [{
+    "matches": ["https://github.com/*/*"],
+    "exclude_globs": ["https://github.com/*/*/*"],
+    "js": ["scripts/toc-widget.js"],
+    "css": ["css/toc-widget.css"]
+  }]
+}
