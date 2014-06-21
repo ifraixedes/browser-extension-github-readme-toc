@@ -1,6 +1,24 @@
 
 .toc-widget-ctn {
   display: none;
+  text-align: center;
+  margin: 1em 0;
+}
+
+.toc-widget-ctn li {
+  margin: 0.3em 0;
+  text-align: left;
+  list-style: none;
+  white-space: wrap;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.toc-widget-ctn li:first-child {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin: 0.7em 0;
 }
 
 .with-full-navigation .show {
