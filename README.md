@@ -12,7 +12,7 @@ I have created this extension because I found that it would very handy to have a
 The extension doesn't have any dependency so, it is very simple and the implementation is so straight forward.
 
 ### Browser extension available
-* [Google Chrome](https://www.google.com/chrome/browser/) / [Chromium](http://www.chromium.org/Home)
+* [Google Chrome / Chromium](https://chrome.google.com/webstore/detail/github-readme-toc/lbmealnkdpmndleijdkljlofnmgmpcdf)
 
 ## TODO
 * Generated an extension, add-on or whatever name which they receive in other browsers. Between them, there are [FireFox](http://firefox.com), [Opera](http://www.opera.com/), [Safari](https://www.apple.com/uk/safari/), [Internet Explorer](http://windows.microsoft.com/en-gb/internet-explorer/download-ie), any other else is welcome as well.
