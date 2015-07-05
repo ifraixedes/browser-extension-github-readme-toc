@@ -1,6 +1,7 @@
 'use strict';
 
 (function (window, document) {
+  var headerLevelRegExp = /h([\d]*)/i;
   var TOC_DIV_ID = 'chrome-extension-github-readme-toc';
   var rightSideCtnElem;
   var readmeAElems;
@@ -28,6 +29,16 @@
         [].forEach.call(readmeAElems, function (readmeElem, idx) {
           var tocLiElem = document.createElement('li');
           var tocAElem = document.createElement('a');
+          var hParse = headerLevelRegExp.exec(readmeElem.parentElement.nodeName);
+          var level;
+
+          if (hParse !== null) {
+            level = parseInt(hParse[1]);
+            if (!isNaN(level) && (level > 1)) {
+              level--;
+              tocAElem.setAttribute('style', 'padding-left: ' + (level * 0.8) + 'em;')
+            }
+          }
 
           tocAElem.innerHTML = readmeElem.parentElement.textContent.trim();
           tocAElem.setAttribute('href', readmeElem.getAttribute('href'));
