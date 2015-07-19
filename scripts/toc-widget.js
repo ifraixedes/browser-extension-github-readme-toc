@@ -9,7 +9,10 @@
   var tocHeader;
   var tocCtnElem = document.getElementById(TOC_DIV_ID);
   var readmeElem = document.querySelector('#readme');
+  var rightSideLastElem; // This elements help to identify when TOC must change to move the element when scrolling
+  var floating = false; // Flag to identify faster if the TOC element is floating wiht scrooling
 
+  // Enable it only for the intial page of the repository
   if (readmeElem) {
     if (!tocCtnElem) {
       tocCtnElem = document.createElement('div');
@@ -17,6 +20,8 @@
       tocCtnElem.classList.add('toc-widget-ctn');
 
       rightSideCtnElem = document.querySelector('.repository-sidebar.clearfix');
+      rightSideLastElem = document.querySelector('.only-with-full-nav');
+
       readmeAElems = readmeElem.querySelectorAll('[href^="#"]');
 
       if (readmeAElems) {
@@ -52,9 +57,26 @@
       }
     }
   } else {
+    // if it isn't the intial page of the repository and TOC element exists, don't show it
     if (tocCtnElem) {
       tocCtnElem.classList.remove('show');
     }
   }
+
+  function tocBehaviourWhenScrolling() {
+    if (tocCtnElem && rightSideLastElem) {
+      if (rightSideLastElem.getClientRects()[0].bottom <= 0) {
+        if (!floating) {
+          tocCtnElem.setAttribute('style', 'position: fixed; top: 0;');
+          floating = true;
+        }
+      } else if (floating) {
+          tocCtnElem.setAttribute('style', '');
+          floating = false;
+      }
+    }
+  }
+
+  window.onscroll = tocBehaviourWhenScrolling;
 })(window, document);
 
