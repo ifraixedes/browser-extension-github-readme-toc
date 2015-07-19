@@ -20,7 +20,7 @@
       tocCtnElem.classList.add('toc-widget-ctn');
 
       rightSideCtnElem = document.querySelector('.repository-sidebar.clearfix');
-      rightSideLastElem = document.querySelector('.only-with-full-nav');
+      rightSideLastElem = rightSideCtnElem.querySelector('.only-with-full-nav');
 
       readmeAElems = readmeElem.querySelectorAll('[href^="#"]');
 
@@ -55,6 +55,9 @@
         rightSideCtnElem.appendChild(tocCtnElem);
         tocCtnElem.classList.add('show');
       }
+
+      // Fix the position if the page load when window is smaller or resized
+      tocBehaviourWhenScrolling();
     }
   } else {
     // if it isn't the intial page of the repository and TOC element exists, don't show it
@@ -65,18 +68,33 @@
 
   function tocBehaviourWhenScrolling() {
     if (tocCtnElem && rightSideLastElem) {
-      if (rightSideLastElem.getClientRects()[0].bottom <= 0) {
-        if (!floating) {
-          tocCtnElem.setAttribute('style', 'position: fixed; top: 0;');
+      var rectObj = rightSideLastElem.getClientRects()[0];
+      if (rectObj.bottom <= 0) {
           floating = true;
-        }
+          tocCtnElem.setAttribute(
+            'style',
+            'position: fixed; top: 0; left: ' + rectObj.left + 'px; width: ' + rectObj.width + 'px;');
       } else if (floating) {
-          tocCtnElem.setAttribute('style', '');
           floating = false;
+          tocCtnElem.setAttribute('style', '');
+      }
+    }
+  }
+
+  function tocBehaviourWhenResizing() {
+    if (tocCtnElem && rightSideLastElem) {
+      var rectObj = rightSideLastElem.getClientRects()[0];
+      if (floating) {
+        tocCtnElem.setAttribute(
+          'style',
+          'position: fixed; top: 0; left: ' + rectObj.left + 'px; width: ' + rectObj.width + 'px;');
+      } else {
+        tocCtnElem.setAttribute('style', '');
       }
     }
   }
 
   window.onscroll = tocBehaviourWhenScrolling;
+  window.onresize = tocBehaviourWhenResizing;
 })(window, document);
 
