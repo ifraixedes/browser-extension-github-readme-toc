@@ -9,7 +9,10 @@
   var tocHeader;
   var tocCtnElem = document.getElementById(TOC_DIV_ID);
   var readmeElem = document.querySelector('#readme');
+  var rightSideLastElem; // This elements help to identify when TOC must change to move the element when scrolling
+  var floating = false; // Flag to identify faster if the TOC element is floating wiht scrooling
 
+  // Enable it only for the intial page of the repository
   if (readmeElem) {
     if (!tocCtnElem) {
       tocCtnElem = document.createElement('div');
@@ -17,6 +20,8 @@
       tocCtnElem.classList.add('toc-widget-ctn');
 
       rightSideCtnElem = document.querySelector('.repository-sidebar.clearfix');
+      rightSideLastElem = rightSideCtnElem.querySelector('.only-with-full-nav');
+
       readmeAElems = readmeElem.querySelectorAll('[href^="#"]');
 
       if (readmeAElems) {
@@ -50,11 +55,46 @@
         rightSideCtnElem.appendChild(tocCtnElem);
         tocCtnElem.classList.add('show');
       }
+
+      // Fix the position if the page load when window is smaller or resized
+      tocBehaviourWhenScrolling();
     }
   } else {
+    // if it isn't the intial page of the repository and TOC element exists, don't show it
     if (tocCtnElem) {
       tocCtnElem.classList.remove('show');
     }
   }
+
+  function tocBehaviourWhenScrolling() {
+    if (tocCtnElem && rightSideLastElem) {
+      var rectObj = rightSideLastElem.getClientRects()[0];
+      if (rectObj.bottom <= 0) {
+          floating = true;
+          tocCtnElem.setAttribute(
+            'style',
+            'position: fixed; top: 0; left: ' + rectObj.left + 'px; width: ' + rectObj.width + 'px;');
+      } else if (floating) {
+          floating = false;
+          tocCtnElem.setAttribute('style', '');
+      }
+    }
+  }
+
+  function tocBehaviourWhenResizing() {
+    if (tocCtnElem && rightSideLastElem) {
+      var rectObj = rightSideLastElem.getClientRects()[0];
+      if (floating) {
+        tocCtnElem.setAttribute(
+          'style',
+          'position: fixed; top: 0; left: ' + rectObj.left + 'px; width: ' + rectObj.width + 'px;');
+      } else {
+        tocCtnElem.setAttribute('style', '');
+      }
+    }
+  }
+
+  window.onscroll = tocBehaviourWhenScrolling;
+  window.onresize = tocBehaviourWhenResizing;
 })(window, document);
 
