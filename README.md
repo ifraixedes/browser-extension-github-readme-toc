@@ -16,8 +16,6 @@ The extension doesn't have any dependency so, it is very simple and the implemen
 
 ## TODO
 * Generated an extension, add-on or whatever name which they receive in other browsers. Between them, there are [FireFox](http://firefox.com), [Opera](http://www.opera.com/), [Safari](https://www.apple.com/uk/safari/), [Internet Explorer](http://windows.microsoft.com/en-gb/internet-explorer/download-ie), any other else is welcome as well.
-* Move the ToC widget according the scroll position of the content when it became non-visible due the scroll move far away from the initial position.
-
 
 ## License
 Source code is release under [MIT license](http://mit-license.org/) and images under [Creative Commons Attribution-ShareAlike 3.0 Unported  license](http://creativecommons.org/licenses/by-sa/3.0/deed.en) as
