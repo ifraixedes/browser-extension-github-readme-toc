@@ -9,7 +9,7 @@
   var tocHeader;
   var tocCtnElem = document.getElementById(TOC_DIV_ID);
   var readmeElem = document.querySelector('#readme');
-  var scrollPosCloseBottom = readmeElem.getClientRects()[0].height + 400;
+  var scrollPosCloseBottom = readmeElem.getClientRects()[0].height;
   var rightSideLastElem; // This elements help to identify when TOC must change to move the element when scrolling
   var floating = false; // Flag to identify faster if the TOC element is floating wiht scrooling
 
