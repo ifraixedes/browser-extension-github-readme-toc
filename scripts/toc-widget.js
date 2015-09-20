@@ -33,6 +33,10 @@
         tocUlElem.appendChild(tocHeader);
 
         [].forEach.call(readmeAElems, function (readmeElem, idx) {
+          if (!/^h/i.test(readmeElem.parentElement.tagName)) {
+            return;
+          }
+
           var tocLiElem = document.createElement('li');
           var tocAElem = document.createElement('a');
           var hParse = headerLevelRegExp.exec(readmeElem.parentElement.nodeName);
