@@ -9,6 +9,7 @@
   var tocHeader;
   var tocCtnElem = document.getElementById(TOC_DIV_ID);
   var readmeElem = document.querySelector('#readme');
+  var scrollPosCloseBottom = readmeElem.getClientRects()[0].height + 400;
   var rightSideLastElem; // This elements help to identify when TOC must change to move the element when scrolling
   var floating = false; // Flag to identify faster if the TOC element is floating wiht scrooling
 
@@ -32,6 +33,10 @@
         tocUlElem.appendChild(tocHeader);
 
         [].forEach.call(readmeAElems, function (readmeElem, idx) {
+          if (!/^h/i.test(readmeElem.parentElement.tagName)) {
+            return;
+          }
+
           var tocLiElem = document.createElement('li');
           var tocAElem = document.createElement('a');
           var hParse = headerLevelRegExp.exec(readmeElem.parentElement.nodeName);
@@ -67,30 +72,47 @@
   }
 
   function tocBehaviourWhenScrolling() {
-    if (tocCtnElem && rightSideLastElem) {
+    if ((tocCtnElem) && (rightSideLastElem)) {
       var rectObj = rightSideLastElem.getClientRects()[0];
       if (rectObj.bottom <= 0) {
-          floating = true;
-          tocCtnElem.setAttribute(
-            'style',
-            'position: fixed; top: 0; left: ' + rectObj.left + 'px; width: ' + rectObj.width + 'px;');
+        floating = true;
+        tocCtnElem.setAttribute(
+          'style',
+          'position: fixed; top: 0; left: ' + rectObj.left + 'px; width: ' + rectObj.width + 'px;');
       } else if (floating) {
-          floating = false;
-          tocCtnElem.setAttribute('style', '');
+        floating = false;
+        tocCtnElem.setAttribute('style', '');
       }
+
+      tweakTOCHeight();
     }
   }
 
   function tocBehaviourWhenResizing() {
-    if (tocCtnElem && rightSideLastElem) {
-      var rectObj = rightSideLastElem.getClientRects()[0];
-      if (floating) {
-        tocCtnElem.setAttribute(
-          'style',
-          'position: fixed; top: 0; left: ' + rectObj.left + 'px; width: ' + rectObj.width + 'px;');
-      } else {
-        tocCtnElem.setAttribute('style', '');
+    if (tocCtnElem) {
+      if (rightSideLastElem) {
+        var rectObj = rightSideLastElem.getClientRects()[0];
+        if (floating) {
+          tocCtnElem.setAttribute(
+            'style',
+            'position: fixed; top: 0; left: ' + rectObj.left + 'px; width: ' + rectObj.width + 'px;');
+        } else {
+          tocCtnElem.setAttribute('style', '');
+        }
       }
+
+      tweakTOCHeight();
+    }
+  }
+
+  function tweakTOCHeight() {
+    var height;
+    if (window.scrollY >= scrollPosCloseBottom) {
+      height = window.innerHeight - 180;
+        tocCtnElem.style.setProperty('height', height + 'px');
+    } else {
+      height = window.innerHeight - 25;
+        tocCtnElem.style.setProperty('height', height + 'px');
     }
   }
 
