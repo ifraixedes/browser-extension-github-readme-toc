@@ -3,7 +3,8 @@
   display: none;
   text-align: center;
   margin: 1em 0;
-  overflow-y: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
   height: 90vh;
 }
 
