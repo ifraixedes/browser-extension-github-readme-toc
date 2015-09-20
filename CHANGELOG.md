@@ -1,6 +1,11 @@
 Browser Extension Github Readme ToC ChangeLog
 =============================================
 
+## 2015-09-20, Version 0.0.5
+
+Fixed bugs
+  * ToC html container element didn't have a right height for large ToCs and when the window's scroll was at the end of the page. PR #8
+
 ## 2015-09-20, Version 0.0.4
 
 Fixed bugs
