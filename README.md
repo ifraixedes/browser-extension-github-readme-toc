@@ -19,7 +19,7 @@ The extension doesn't have any dependency so, it is very simple and the implemen
 
 ## License
 Source code is release under [MIT license](http://mit-license.org/) and images under [Creative Commons Attribution-ShareAlike 3.0 Unported  license](http://creativecommons.org/licenses/by-sa/3.0/deed.en) as
-a derived work of Jason Long (https://twitter.com/jasonlong) and MGalloway (WMF)
+a derived work of [Jason Long](https://twitter.com/jasonlong) and [MGalloway (WMF)]
 (http://commons.wikimedia.org/w/index.php?title=User:MGalloway_(WMF)&action=edit&redlink=1)
 for the ToC icon.
 
